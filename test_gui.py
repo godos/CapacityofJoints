@@ -29,7 +29,8 @@ class MainWindow(QMainWindow):
 
         # Window dimensions
         geometry = qApp.desktop().availableGeometry(self)
-        self.setFixedSize(geometry.width() * 0.8, geometry.height() * 0.7)
+        #self.setFixedSize(geometry.width() * 0.8, geometry.height() * 0.7)
+        self.resize(geometry.width() * 0.8, geometry.height() * 0.7)
 
         # Create widgets
         self.edit = QLineEdit("Write my name here")
