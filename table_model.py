@@ -11,7 +11,7 @@ class CustomTableModel(QAbstractTableModel):
         self.input_dates = data[0].values
         self.input_magnitudes = data[1].values
 
-        self.column_count = 3
+        self.column_count = 2
         self.row_count = len(self.input_magnitudes)
 
     def rowCount(self, parent=QModelIndex()):
@@ -24,7 +24,7 @@ class CustomTableModel(QAbstractTableModel):
         if role != Qt.DisplayRole:
             return None
         if orientation == Qt.Horizontal:
-            return ("Date", "Magnitude", "Test")[section]
+            return ("Date", "Magnitude")[section]
         else:
             return "{}".format(section)
 
