@@ -6,11 +6,12 @@ from PySide2.QtCore import Slot, qApp
 
 class Form(QMainWindow):
 
-    def __init__(self, parent=None):
+    def __init__(self, widget, parent=None):
         super(Form, self).__init__(parent)
 
         # Set window title
         self.setWindowTitle("CoBolt")
+        self.setCentralWidget(widget)
 
         # Initiat menu
         self.menu = self.menuBar()
