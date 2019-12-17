@@ -1,7 +1,8 @@
 import sys
-from PySide2.QtWidgets import (QLineEdit, QPushButton, QApplication,
-    QVBoxLayout, QHBoxLayout, QDialog, QCalendarWidget, QMainWindow, QAction)
+from PySide2.QtWidgets import (QLineEdit, QPushButton, QApplication, QVBoxLayout, QHBoxLayout, QDialog,
+                               QCalendarWidget, QMainWindow, QAction)
 from PySide2.QtGui import QKeySequence
+from PySide2.QtCore import Slot, qApp
 
 class Form(QMainWindow):
 
@@ -20,6 +21,11 @@ class Form(QMainWindow):
         exit_action.setShortcut(QKeySequence.Quit)
         exit_action.triggered.connect(self.close)
         self.file_menu.addAction(exit_action)
+
+        # Status bar
+        self.status = self.statusBar()
+        self.status.showMessage("Hei, dette er CoBolt!")
+
 
 
         # Create widgets
