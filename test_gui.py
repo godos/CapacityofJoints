@@ -1,11 +1,27 @@
 import sys
 from PySide2.QtWidgets import (QLineEdit, QPushButton, QApplication,
-    QVBoxLayout, QHBoxLayout, QDialog, QCalendarWidget)
+    QVBoxLayout, QHBoxLayout, QDialog, QCalendarWidget, QMainWindow, QAction)
+from PySide2.QtGui import QKeySequence
 
-class Form(QDialog):
+class Form(QMainWindow):
 
     def __init__(self, parent=None):
         super(Form, self).__init__(parent)
+
+        # Set window title
+        self.setWindowTitle("CoBolt")
+
+        # Initiat menu
+        self.menu = self.menuBar()
+        self.file_menu = self.menu.addMenu("File")
+
+        # Set exit
+        exit_action = QAction("Exit", self)
+        exit_action.setShortcut(QKeySequence.Quit)
+        exit_action.triggered.connect(self.close)
+        self.file_menu.addAction(exit_action)
+
+
         # Create widgets
         self.edit = QLineEdit("Write my name here")
         self.button = QPushButton("Show Greetings")
