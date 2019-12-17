@@ -26,7 +26,9 @@ class Form(QMainWindow):
         self.status = self.statusBar()
         self.status.showMessage("Hei, dette er CoBolt!")
 
-
+        # Window dimensions
+        geometry = qApp.desktop().availableGeometry(self)
+        self.setFixedSize(geometry.width() * 0.8, geometry.height() * 0.7)
 
         # Create widgets
         self.edit = QLineEdit("Write my name here")
