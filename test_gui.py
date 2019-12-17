@@ -4,10 +4,10 @@ from PySide2.QtWidgets import (QLineEdit, QPushButton, QApplication, QVBoxLayout
 from PySide2.QtGui import QKeySequence
 from PySide2.QtCore import Slot, qApp
 
-class Form(QMainWindow):
+class MainWindow(QMainWindow):
 
     def __init__(self, widget, parent=None):
-        super(Form, self).__init__(parent)
+        super(MainWindow, self).__init__(parent)
 
         # Set window title
         self.setWindowTitle("CoBolt")
@@ -63,7 +63,7 @@ class Form(QMainWindow):
 
     # Greets the user
     def greetings(self):
-        print ("Hello %s" % self.edit.text())
+        print("Hello %s" % self.edit.text())
 
     # Clear all text
     def cleartext(self):
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     # Create the Qt Application
     app = QApplication(sys.argv)
     # Create and show the form
-    form = Form()
+    form = MainWindow()
     form.show()
     # Run the main Qt loop
     sys.exit(app.exec_())

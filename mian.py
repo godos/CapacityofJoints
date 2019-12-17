@@ -4,7 +4,7 @@ import pandas as pd
 
 from PySide2.QtCore import QDateTime, QTimeZone
 from PySide2.QtWidgets import QApplication
-from main_window import MainWindow
+from test_gui import MainWindow
 from main_widget import Widget
 
 
