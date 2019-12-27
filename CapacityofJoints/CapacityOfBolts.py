@@ -19,7 +19,7 @@ class COB(object):
         Bolt tension class
     t_sc : float
         Depth of counter-sunk bolt hole (holes are considered not to be counter-sunk if this values is zero)
-    n : int
+    n : int (default = 1)
         number of shear planes
     shear_through_threads : bool
         True if shear forces goes through threaded part of bolt
@@ -31,8 +31,11 @@ class COB(object):
         self.btc = btc
 
         self.d0 = d0 = kwargs.get("d0", self.add_to_boltdia)
-        self.t_sc = t_sc = kwargs.get("t_sc", None)
-        self.n = n = kwargs.get("n", None)
+        self.t_sc = t_sc = kwargs.get("t_sc", 0)
+        self.n = n = kwargs.get("n", 1)
+        self.shear_through_threads = kwargs.get("shear_through_threads", True)
+
+
 
     @property
     def add_to_boltdia(self):
