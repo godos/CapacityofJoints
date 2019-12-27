@@ -30,9 +30,20 @@ class COB(object):
         self.d = d
         self.btc = btc
 
-        self.d0 = d0 = kwargs.get("d0", None)
+        self.d0 = d0 = kwargs.get("d0", self.add_to_boltdia)
         self.t_sc = t_sc = kwargs.get("t_sc", None)
         self.n = n = kwargs.get("n", None)
 
-
+    @property
+    def add_to_boltdia(self):
+        """
+        Return standard size of bolt hole diameter based on the bolt diameter
+        TODO: Update with correct values!
+        """
+        if self.d <= 20:
+            return self.d + 1
+        elif self.d <= 26:
+            return self.d + 2
+        else:
+            return self.d + 3
 
