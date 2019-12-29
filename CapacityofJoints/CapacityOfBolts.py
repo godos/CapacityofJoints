@@ -4,6 +4,7 @@
 Classes for calculating the structural capacity of bolts
 
 """
+from math import pi
 
 class COB(object):
     """
@@ -23,6 +24,20 @@ class COB(object):
         number of shear planes
     shear_through_threads : bool
         True if shear forces goes through threaded part of bolt
+    e1 : float
+        Minimum edge distance in force direction
+    e2 : float
+        Minimum edge distance normal to force direction
+    p1 : float
+        Minimum internal distance in force direction
+    p2 : float
+        Minimum internal distance normal to force direction
+    t_pl : float
+        Plate thickness
+    fu : float
+        Tensile strength of plate material
+    friction_class = str
+        Friction class (default values : D)
 
     """
 
@@ -34,6 +49,16 @@ class COB(object):
         self.t_sc = t_sc = kwargs.get("t_sc", 0)
         self.n = n = kwargs.get("n", 1)
         self.shear_through_threads = kwargs.get("shear_through_threads", True)
+
+        self.friction_class = friction_class = kwargs.get("friction_class", "D")
+        
+        # Geometry of plate
+        self.e1 = e1 = kwargs.get("e1", None)
+        self.e2 = e2 = kwargs.get("e2", None)
+        self.p1 = p1 = kwargs.get("p1", None)
+        self.p2 = p2 = kwargs.get("p2", None)
+        self.t_pl = t_pl = kwargs.get("t_pl", None)
+        self.fu = fu = kwargs.get("fu", None)
 
 
 
@@ -50,3 +75,8 @@ class COB(object):
         else:
             return self.d + 3
 
+    def area_of_bolt(self):
+        """
+        Area of the bolt
+        """
+        return pi/4*self.d**2
