@@ -124,3 +124,12 @@ class COB(object):
         if not fc:
             raise ValueError("Friction class %s should be in %s" % (self.friction_class, friction_coefficients.keys()))
         return fc
+
+    @property
+    def fub(self):
+        """
+        Return fub, ultimate tensile strength of the bolt, based on bolt tension class
+        """
+        fub = float(self.btc.split(".")[0])*100
+        return fub
+
