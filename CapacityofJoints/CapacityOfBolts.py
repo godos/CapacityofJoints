@@ -45,6 +45,12 @@ class COB(object):
         3	Bolts in long oval holes with the widest axis normal to the force direction
         4	Bolts in short oval holes with the widest axis parallel with the force direction
         5	Bolts in long oval holes with the widest axis parallel with the force direction
+    gamma_M2 : float
+        Material factor, default 1.25
+    gamma_M3 : float
+        Material factor, default 1.25
+    gamma_f : float
+        Load factor, default 1.0
 
 
 
@@ -69,6 +75,11 @@ class COB(object):
         self.p2 = p2 = kwargs.get("p2", None)
         self.t_pl = t_pl = kwargs.get("t_pl", None)
         self.fu = fu = kwargs.get("fu", None)
+
+        # Partial load- and material-factors
+        self.gamma_M2 = gamma_M2 = kwargs.get("gamma_M2", 1.25)
+        self.gamma_M3 = gamma_M3 = kwargs.get("gamma_M3", 1.25)
+        self.gamma_f = gamma_f = kwargs.get("gamma_f", 1.0)
 
     @property
     def ks(self):
@@ -107,7 +118,8 @@ class COB(object):
         else:
             return self.d + 3
 
-    def area_of_bolt(self):
+    @property
+    def A(self):
         """
         Area of the bolt
         """
@@ -212,3 +224,9 @@ class COB(object):
         """
         return 0.7*self.f_ub*self.As/1000
 
+    @property
+    def F_v_Rd(self):
+        """
+        Calculate the shear force capacity of one bolt in kN
+        """
+        return self.av*self.f_ub*self.A/self.gamma_M2/1000

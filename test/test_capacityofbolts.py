@@ -7,7 +7,7 @@ import unittest
 from CapacityofJoints.CapacityOfBolts import COB
 
 
-class TestCapacityOfJoints(unittest.TestCase):
+class TestCapacityOfBolts(unittest.TestCase):
     def setUp(self):
         """
         Common setup for all tests
@@ -20,7 +20,7 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
         Test that the correct area is calculated
         """
-        self.assertAlmostEqual(self.M20.area_of_bolt(), 314, places=0, msg="Area of bolt is incorrect")
+        self.assertAlmostEqual(self.M20.A, 314, places=0, msg="Area of bolt is incorrect")
 
     def test_tension_area(self):
         """
@@ -80,3 +80,9 @@ class TestCapacityOfJoints(unittest.TestCase):
         Test pre-tension value
         """
         self.assertAlmostEqual(self.M22.f_pretension, 212.1, places=1, msg="Incorrect value for pre-tension!")
+
+    def test_F_v_Rd(self):
+        """
+        Test shear force capacity
+        """
+        self.assertAlmostEqual(self.M20.F_v_Rd, 120.6, places=1, msg="Incorrect values for shear force capacity!")
