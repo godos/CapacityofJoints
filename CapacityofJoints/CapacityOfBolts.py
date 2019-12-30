@@ -101,3 +101,15 @@ class COB(object):
         if not tension_area:
             raise ValueError("Tension area for %s is not found!" % str(self.d))
         return tension_area
+
+    @property
+    def k2(self):
+        """
+        k2 parameter is 0.63 for counter-sunk bolts and 0.9 if not counter-sunk
+        """
+        if self.t_sc == 0:
+            return 0.9
+        elif self.t_sc > 0:
+            return 0.63
+        else:
+            raise ValueError("Depth of counter-sunk hole shall be given as a positive float value")
