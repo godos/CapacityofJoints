@@ -113,3 +113,14 @@ class COB(object):
             return 0.63
         else:
             raise ValueError("Depth of counter-sunk hole shall be given as a positive float value")
+
+    @property
+    def friction_coefficient(self):
+        """
+        Return friction coefficient based on friction class
+        """
+        friction_coefficients = dict(A=0.5, B=0.4, C=0.3, D=0.2)
+        fc = friction_coefficients.get(self.friction_class, None)
+        if not fc:
+            raise ValueError("Friction class %s should be in %s" % (self.friction_class, friction_coefficients.keys()))
+        return fc

@@ -14,7 +14,7 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
 
         self.M20 = COB(d=20, btc="8.8")
-        self.M22 = COB(d=22, btc="10.9", t_sc=2.2)
+        self.M22 = COB(d=22, btc="10.9", t_sc=2.2, friction_class="A")
 
     def test_area(self):
         """
@@ -34,3 +34,10 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
         self.assertEqual(self.M20.k2, 0.9, msg="Incorrect k2 values returned for non-counter-sunk bolts!")
         self.assertEqual(self.M22.k2, 0.63, msg="Incorrect k2 value returned for counter-sunk bolts!")
+
+    def test_friction_class(self):
+        """
+        Test friction coefficient returned based on friction class
+        """
+        self.assertEqual(self.M20.friction_coefficient, 0.2, msg="Incorrect friction coefficient!")
+        self.assertEqual(self.M22.friction_coefficient, 0.5, msg="Incorrect friction coefficient!")
