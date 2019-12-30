@@ -54,3 +54,16 @@ class TestCapacityOfJoints(unittest.TestCase):
         Test yield strength of bolt based on the bolt tension class
         """
         self.assertEqual(self.M20.fy, 640, msg="Incorrect value of fy for 8.8 bolts!")
+
+    def test_av(self):
+        """
+        Test shear factor
+        """
+        self.assertEqual(self.M20.av, 0.6, msg="Incorrect value for av for 8.8 bolts!")
+        self.assertEqual(self.M22.av, 0.5, msg="Incorrect values for av for 10.9 bolts")
+
+    def test_dm(self):
+        """
+        Test dm value
+        """
+        self.assertEqual(self.M20.dm, 31.1, msg="Incorrect value for dm value!")

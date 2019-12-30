@@ -89,18 +89,39 @@ class COB(object):
         tension_area_dict = dict(
             M10=58,
             M12=84.3,
-            M16 = 157,
-            M20 = 245,
-            M22 = 303,
-            M24 = 353,
-            M27 = 459,
-            M30 = 561,
-            M36 = 817
+            M16=157,
+            M20=245,
+            M22=303,
+            M24=353,
+            M27=459,
+            M30=561,
+            M36=817
         )
         tension_area = tension_area_dict.get("M%s" % self.d, None)
         if not tension_area:
             raise ValueError("Tension area for %s is not found!" % str(self.d))
         return tension_area
+
+    @property
+    def dm(self):
+        """
+        Return the dm value (the mean value of the key width (S) and the corner dimension (e)
+        """
+        dm_dict = dict(
+            M10=16.8,
+            M12=18.9,
+            M16=24.7,
+            M20=31.1,
+            M22=34.4,
+            M24=37.3,
+            M27=44.2,
+            M30=47.9,
+            M36=57.3
+        )
+        dm = dm_dict.get("M%s" % self.d, None)
+        if not dm:
+            raise ValueError("Tension area for %s is not found!" % str(self.d))
+        return dm
 
     @property
     def k2(self):
@@ -140,4 +161,15 @@ class COB(object):
         """
         fy = float(self.btc.split(".")[1])*self.fub/10
         return fy
+
+    @property
+    def av(self):
+        """
+        Return av (shear factor) based on bolt tension class
+        """
+        if self.btc in ["4.6", "5.6", "8.8"]:
+            av = 0.6
+        else:
+            av = 0.5
+        return av
 
