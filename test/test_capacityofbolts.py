@@ -86,3 +86,9 @@ class TestCapacityOfBolts(unittest.TestCase):
         Test shear force capacity
         """
         self.assertAlmostEqual(self.M20.F_v_Rd, 120.6, places=1, msg="Incorrect values for shear force capacity!")
+
+    def test_F_s_Rd(self):
+        """
+        Test friction capacity
+        """
+        self.assertAlmostEqual(self.M20.F_s_Rd, 22.0, places=1, msg="Incorrect value for friction capacity")

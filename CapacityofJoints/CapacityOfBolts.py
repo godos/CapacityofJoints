@@ -230,3 +230,10 @@ class COB(object):
         Calculate the shear force capacity of one bolt in kN
         """
         return self.av*self.f_ub*self.A/self.gamma_M2/1000
+
+    @property
+    def F_s_Rd(self):
+        """
+        Calculated the friction capacity of one bolt in kN
+        """
+        return self.ks*self.n*self.friction_coefficient*self.f_pretension/self.gamma_M3
