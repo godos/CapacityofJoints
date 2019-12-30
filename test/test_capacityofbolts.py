@@ -14,7 +14,7 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
 
         self.M20 = COB(d=20, btc="8.8")
-        self.M22 = COB(d=22, btc="10.9", t_sc=2.2, friction_class="A")
+        self.M22 = COB(d=22, btc="10.9", t_sc=2.2, friction_class="A", hole_type=3)
 
     def test_area(self):
         """
@@ -66,4 +66,11 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
         Test dm value
         """
-        self.assertEqual(self.M20.dm, 31.1, msg="Incorrect value for dm value!")
+        self.assertEqual(self.M20.dm, 31.1, msg="Incorrect value for dm!")
+
+    def test_ks(self):
+        """
+        Test k1 value
+        """
+        self.assertEqual(self.M20.ks, 1.0, msg="Incorrect value for ks!")
+        self.assertEqual(self.M22.ks, 0.6, msg="Incorrect value for ks (M22)!")

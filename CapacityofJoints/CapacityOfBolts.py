@@ -38,6 +38,13 @@ class COB(object):
         Tensile strength of plate material
     friction_class = str
         Friction class (default values : D)
+    hole_type : int
+        Integer is chosen based on the following list  (1 is the default value):
+        1	Bolts in normal holes
+        2	Bolts in overly large holes or bolts in short oval holes with the widest axis normal to the force direction
+        3	Bolts in long oval holes with the widest axis normal to the force direction
+        4	Bolts in short oval holes with the widest axis parallel with the force direction
+        5	Bolts in long oval holes with the widest axis parallel with the force direction
 
     """
 
@@ -51,6 +58,7 @@ class COB(object):
         self.shear_through_threads = kwargs.get("shear_through_threads", True)
 
         self.friction_class = friction_class = kwargs.get("friction_class", "D")
+        self.hole_type = hole_type = kwargs.get("hole_type", 1)
         
         # Geometry of plate
         self.e1 = e1 = kwargs.get("e1", None)
@@ -60,7 +68,29 @@ class COB(object):
         self.t_pl = t_pl = kwargs.get("t_pl", None)
         self.fu = fu = kwargs.get("fu", None)
 
+    @property
+    def ks(self):
+        """
+        Return ks value based on hole type (from table 3.6)
+        """
+        ks_values = [1.0, 0.85, 0.6, 0.76, 0.63]
+        try:
+            ks = ks_values[self.hole_type-1]
+        except IndexError:
+            raise IndexError("Hole type should be given as an integer between 1 - 5!")
+        return ks
 
+    @property
+    def r1(self):
+        """
+        Return r1 value based on hole type (note 1 in table 3.4)
+        """
+        r1_values = [1.0, 0.8, 0.7, 1.0, 1.0]
+        try:
+            r1 = r1_values[self.hole_type-1]
+        except IndexError:
+            raise IndexError("Hole type should be given as an integer between 1 - 5!")
+        return r1
 
     @property
     def add_to_boltdia(self):
