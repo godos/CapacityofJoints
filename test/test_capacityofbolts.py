@@ -26,7 +26,7 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
         Test that the correct tension area is returned
         """
-        self.assertAlmostEqual(self.M20.tension_area_of_bolt, 245, places=0, msg="Tension area is incorrect!")
+        self.assertAlmostEqual(self.M20.As, 245, places=0, msg="Tension area is incorrect!")
 
     def test_counter_sunk(self):
         """
@@ -46,8 +46,8 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
         Test ultimate tensile strength of bolt based on the bolt tension class
         """
-        self.assertEqual(self.M20.fub, 800, msg="Incorrect value of fub for 8.8 (ultimate tensile strength of bolt)")
-        self.assertEqual(self.M22.fub, 1000, msg="Incorrect value of fub for 10.9 (ultimate tensile strength of bolt)")
+        self.assertEqual(self.M20.f_ub, 800, msg="Incorrect value of fub for 8.8 (ultimate tensile strength of bolt)")
+        self.assertEqual(self.M22.f_ub, 1000, msg="Incorrect value of fub for 10.9 (ultimate tensile strength of bolt)")
 
     def test_fy(self):
         """
@@ -74,3 +74,9 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
         self.assertEqual(self.M20.ks, 1.0, msg="Incorrect value for ks!")
         self.assertEqual(self.M22.ks, 0.6, msg="Incorrect value for ks (M22)!")
+
+    def test_f_pretension(self):
+        """
+        Test pre-tension value
+        """
+        self.assertAlmostEqual(self.M22.f_pretension, 212.1, places=1, msg="Incorrect value for pre-tension!")

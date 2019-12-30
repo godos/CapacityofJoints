@@ -46,6 +46,8 @@ class COB(object):
         4	Bolts in short oval holes with the widest axis parallel with the force direction
         5	Bolts in long oval holes with the widest axis parallel with the force direction
 
+
+
     """
 
     def __init__(self, d, btc, **kwargs):
@@ -112,7 +114,7 @@ class COB(object):
         return pi/4*self.d**2
 
     @property
-    def tension_area_of_bolt(self):
+    def As(self):
         """
         Return the tension area of the bolt
         """
@@ -177,7 +179,7 @@ class COB(object):
         return fc
 
     @property
-    def fub(self):
+    def f_ub(self):
         """
         Return fub, ultimate tensile strength of the bolt, based on bolt tension class
         """
@@ -189,7 +191,7 @@ class COB(object):
         """
         Return fy, yield strength of bolt, based on bolt tension class
         """
-        fy = float(self.btc.split(".")[1])*self.fub/10
+        fy = float(self.btc.split(".")[1]) * self.f_ub / 10
         return fy
 
     @property
@@ -202,4 +204,11 @@ class COB(object):
         else:
             av = 0.5
         return av
+
+    @property
+    def f_pretension(self):
+        """
+        Calculate the pre-tension value from equation (3.7). Value is returned in kN.
+        """
+        return 0.7*self.f_ub*self.As/1000
 
