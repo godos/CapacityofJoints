@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding: utf-8
+# -*- coding: utf-8 -*-
 """
 Classes for calculating the structural capacity of bolts
 
@@ -80,3 +80,24 @@ class COB(object):
         Area of the bolt
         """
         return pi/4*self.d**2
+
+    @property
+    def tension_area_of_bolt(self):
+        """
+        Return the tension area of the bolt
+        """
+        tension_area_dict = dict(
+            M10=58,
+            M12=84.3,
+            M16 = 157,
+            M20 = 245,
+            M22 = 303,
+            M24 = 353,
+            M27 = 459,
+            M30 = 561,
+            M36 = 817
+        )
+        tension_area = tension_area_dict.get("M%s" % self.d, None)
+        if not tension_area:
+            raise ValueError("Tension area for %s is not found!" % str(self.d))
+        return tension_area
