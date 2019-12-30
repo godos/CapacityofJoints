@@ -133,3 +133,11 @@ class COB(object):
         fub = float(self.btc.split(".")[0])*100
         return fub
 
+    @property
+    def fy(self):
+        """
+        Return fy, yield strength of bolt, based on bolt tension class
+        """
+        fy = float(self.btc.split(".")[1])*self.fub/10
+        return fy
+

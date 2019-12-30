@@ -48,4 +48,9 @@ class TestCapacityOfJoints(unittest.TestCase):
         """
         self.assertEqual(self.M20.fub, 800, msg="Incorrect value of fub for 8.8 (ultimate tensile strength of bolt)")
         self.assertEqual(self.M22.fub, 1000, msg="Incorrect value of fub for 10.9 (ultimate tensile strength of bolt)")
-        print(self.M20.fub)
+
+    def test_fy(self):
+        """
+        Test yield strength of bolt based on the bolt tension class
+        """
+        self.assertEqual(self.M20.fy, 640, msg="Incorrect value of fy for 8.8 bolts!")
